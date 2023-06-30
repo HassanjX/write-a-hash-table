@@ -24,7 +24,7 @@ typedef struct {
 
 ## Initialising and deleting
 
-We need to define initialisation functions for `ht_item`s. This function
+We need to define initialization functions for `ht_item`s. This function
 allocates a chunk of memory the size of an `ht_item`, and saves a copy of the
 strings `k` and `v` in the new chunk of memory. The function is marked as
 `static` because it will only ever be called by code internal to the hash table.
@@ -36,17 +36,21 @@ strings `k` and `v` in the new chunk of memory. The function is marked as
 
 #include "hash_table.h"
 
+/*Your code utilizes a deprecated function, class member, variable, or typedef.
+Deprecation of symbols can be achieved by applying a __declspec(deprecated)
+  modifier or adhering to the C++14 standard.
+*/
 static ht_item* ht_new_item(const char* k, const char* v) {
     ht_item* i = malloc(sizeof(ht_item));
-    i->key = strdup(k);
-    i->value = strdup(v);
+    i->key = _strdup(k);
+    i->value = _strdup(v);
     return i;
 }
 ```
 
-`ht_new` initialises a new hash table. `size` defines how many items we can
+`ht_new` initializes a new hash table. `size` defines how many items we can
 store. This is fixed at 53 for now. We'll expand this in the section on
-[resizing](/06-resizing). We initialise the array of items with `calloc`, which
+[resizing](/06-resizing). We initialize the array of items with `calloc`, which
 fills the allocated memory with `NULL` bytes. A `NULL` entry in the array
 indicates that the bucket is empty.
 
@@ -87,7 +91,7 @@ void ht_del_hash_table(ht_hash_table* ht) {
 }
 ```
 
-We have written code which defines a hash table, and lets us create and destroy
+We have written code that defines a hash table and lets us create and destroy
 one. Although it doesn't do much at this point, we can still try it out.
 
 ```c
